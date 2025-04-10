@@ -27,7 +27,7 @@
         
         header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
             background-color: var(--background-color);
             border-bottom: 1px solid rgba(128, 0, 32, 0.2);
         }
@@ -99,7 +99,7 @@
         }
         
         section {
-            padding: 80px 20px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -108,69 +108,63 @@
             text-align: center;
             color: var(--primary-color);
             font-size: 2.5rem;
-            margin-bottom: 40px;
+            margin-bottom: 10px;
             font-weight: 400;
         }
         
-        .hero {
-            height: 80vh;
-            background-image: url('/api/placeholder/1200/800');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.3);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .quote-section {
             text-align: center;
+            background-color: var(--background-color);
+            margin-bottom: 0;
         }
         
-        .hero h1 {
-            font-size: 4rem;
+        .quote-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 30px 50px;
+        }
+        
+        .quote-text {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--primary-color);
+            line-height: 1.8;
             margin-bottom: 20px;
         }
         
-        .hero p {
-            font-size: 1.8rem;
+        .quote-author {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            text-align: right;
         }
         
-        .countdown {
+        .quote-container:before {
+            top: 0;
+            left: 0;
+        }
+        
+        .quote-container:after {
+            bottom: -20px;
+            right: 0;
+            transform: rotate(180deg);
+        }
+
+        .image-section {
+            padding: 20px;
             display: flex;
             justify-content: center;
-            margin: 50px 0;
+            align-items: center;
+            height: 100vh; /* facoltativo: per centrarla anche verticalmente */
         }
         
-        .countdown-item {
-            margin: 0 20px;
-            text-align: center;
+        .responsive-img {
+            max-width: 100%;
+            height: 100%;
         }
-        
-        .countdown-number {
-            font-size: 3rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        
-        .countdown-label {
-            font-size: 1rem;
-            color: var(--text-color);
+
+        .responsive-img-2 {
+            height: 100%;
         }
         
         .locations-container {
@@ -194,17 +188,17 @@
         }
         
         .location-image {
-            height: 250px;
+            height: 300px;
             background-size: cover;
             background-position: center;
         }
         
         .ceremony-image {
-            background-image: url('/api/placeholder/600/400');
+            background-image: url('./images/church.jpg');
         }
         
         .reception-image {
-            background-image: url('/api/placeholder/600/400');
+            background-image: url('./images/house.jpg');
         }
         
         .location-details {
@@ -264,6 +258,10 @@
         .footer-content p {
             margin-bottom: 15px;
         }
+
+        .anchor-offset {
+            position: relative;
+        }
         
         @media (max-width: 768px) {
             .names {
@@ -301,12 +299,8 @@
                 text-align: center;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
+            .quote-text {
+                font-size: 1.4rem;
             }
             
             .countdown {
@@ -315,6 +309,14 @@
             
             .countdown-item {
                 margin: 10px;
+            }
+
+            .anchor-offset::before {
+                content: "";
+                display: block;
+                height: 250px; /* altezza della navbar */
+                margin-top: -80px;
+                visibility: hidden;
             }
         }
     </style>
@@ -337,50 +339,48 @@
             <li><a href="#gift-list">Lista Nozze</a></li>
         </ul>
     </nav>
-    
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Maddalena & Marco</h1>
-            <p>Ci sposiamo!</p>
-        </div>
+
+    <section class="image-section">
+        <img src="./images/homepage.jpg" class="responsive-img">
     </section>
     
-    <section>
-        <div class="countdown">
-            <div class="countdown-item">
-                <div class="countdown-number" id="days">0</div>
-                <div class="countdown-label">Giorni</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="hours">0</div>
-                <div class="countdown-label">Ore</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutes">0</div>
-                <div class="countdown-label">Minuti</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="seconds">0</div>
-                <div class="countdown-label">Secondi</div>
-            </div>
+    <div class="quote-section">
+        <div class="quote-container">
+            <p class="quote-text">
+                I was her, She was me <br>
+                we were one, we were free <br>
+                and if there's somebody <br>
+                calling me on, she's the one</p>
+            <p class="quote-author">She's the One - Robbie Williams</p>
         </div>
-        
-        <h2>Vi invitiamo a celebrare il nostro amore</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.2rem;">
-            Siamo felici di condividere con voi il giorno più importante della nostra vita. La vostra presenza renderà questo momento ancora più speciale.
+    </div>
+
+    <section id="home" class="anchor-offset">
+        <h2>Benvenuti al nostro matrimonio</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem;">
+            In attesa del grande giorno, abbiamo creato questo sito, dove puoi trovare una serie di informazioni da condividere.
         </p>
     </section>
+    <section class="image-section">
+        <img src="./images/homepage_2.jpg" class="responsive-img-2">
+    </section>
     
-    <section id="locations">
+    <section id="locations" class="anchor-offset">
         <h2>Locations</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; font-size: 1.2rem;">
+        La cerimonia si svolgerà il 19 Settembre 2025 presso la Parrocchia di San Giorgio in Braida alle ore 15.00<br> 
+        I festeggiamenti proseguiranno presso Villa Cariola
+        </p>
         <div class="locations-container">
             <div class="location-card">
                 <div class="location-image ceremony-image"></div>
                 <div class="location-details">
                     <h3>Cerimonia</h3>
-                    <p>Parrocchia di San Giorgio</p>
-                    <p><i class="far fa-clock"></i> Orario da definire</p>
-                    <a href="#" class="button">Mappa</a>
+                    <p>Parrocchia di San Giorgio in Braida <br>
+                        Piazzetta S.Giorgio, 37129, Verona VR
+                    </p>
+                    <p><i class="far fa-clock"></i> 15:00 </p>
+                    <a href="https://maps.app.goo.gl/sNZFgL3J9tjLLA458" class="button">Mappa</a>
                 </div>
             </div>
             
@@ -388,19 +388,38 @@
                 <div class="location-image reception-image"></div>
                 <div class="location-details">
                     <h3>Ricevimento</h3>
-                    <p>Villa Cariola</p>
-                    <p><i class="far fa-clock"></i> Orario da definire</p>
-                    <a href="#" class="button">Mappa</a>
+                    <p>Villa Cariola<br>
+                    Località Preele, 11, 37013, Caprino Veronese VR
+                    </p>
+                    <p><i class="far fa-clock"></i>Orario da definire</p>
+                    <a href="https://maps.app.goo.gl/2CfdxhnoenSGwFcp7" class="button">Mappa</a>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="gift-list">
+    <section id="gift-list" class="anchor-offset">
         <h2>Lista Nozze</h2>
+        <div class="quote-section">
+            <div class="quote-container">
+                <p class="quote-text">
+                    Sì, viaggiare <br>
+                    Evitando le buche più dure <br>
+                    Senza per questo cadere nelle tue paure <br>
+                    Gentilmente senza fumo con amore <br>
+                    Dolcemente viaggiare
+                </p>
+                <p class="quote-author">Si, viaggiare - Lucio Battisti</p>
+            </div>
+        </div>
+        <section class="image-section">
+            <img src="./images/lista_nozze.jpg" class="responsive-img-2">
+        </section>
         <div class="gift-list">
-            <p>Il vostro affetto e la vostra presenza sono il regalo più grande. Per chi desidera contribuire in altro modo, abbiamo preparato una lista nozze.</p>
-            <a href="#" class="button">Visualizza Lista Nozze</a>
+            <p>Se desiderate contribuire al viaggio dei nostri sogni potete utilizzare le info qui sotto<br>
+                Intestatario: Montresor Marco <br>
+                IBAN: IT57W0329601601000066427315
+            </p>
         </div>
     </section>
     
@@ -413,37 +432,6 @@
     </footer>
     
     <script>
-        // Countdown Timer
-        const weddingDate = new Date('September 19, 2025 00:00:00').getTime();
-        
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
-            
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById('days').innerText = 0;
-                document.getElementById('hours').innerText = 0;
-                document.getElementById('minutes').innerText = 0;
-                document.getElementById('seconds').innerText = 0;
-            }
-        }
-        
-        // Initial call
-        updateCountdown();
-        
-        // Update every second
-        const x = setInterval(updateCountdown, 1000);
         
         // Mobile menu toggle
         const hamburger = document.getElementById('hamburger');
