@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maddalena & Marco - Il Nostro Matrimonio</title>
+    <style>
+        :root {
+            --primary-color: #800020; /* bordeaux */
+            --background-color: #fffff0; /* avorio */
+            --accent-color: #d4af37; /* oro/dorato per accenti */
+            --text-color: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--background-color);
+            border-bottom: 1px solid rgba(128, 0, 32, 0.2);
+        }
+        
+        .names {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .date {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+        
+        nav {
+            background-color: var(--background-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 15px 0;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+        
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .hero {
+            height: 80vh;
+            background-image: url('/api/placeholder/1200/800');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.3);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.8rem;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        
+        .countdown-item {
+            margin: 0 20px;
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 3rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        
+        .locations-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 40px;
+        }
+        
+        .location-card {
+            flex: 1 1 400px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .location-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .ceremony-image {
+            background-image: url('/api/placeholder/600/400');
+        }
+        
+        .reception-image {
+            background-image: url('/api/placeholder/600/400');
+        }
+        
+        .location-details {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .location-details h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .location-details p {
+            margin-bottom: 15px;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #600018;
+            transform: translateY(-2px);
+        }
+        
+        .gift-list {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .gift-list p {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .names {
+                font-size: 2.5rem;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+            }
+            
+            nav {
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            
+            nav ul.active {
+                max-height: 300px;
+                padding: 15px 0;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                margin: 10px;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="names">Maddalena & Marco</h1>
+        <p class="date">19 Settembre 2025</p>
+    </header>
+    
+    <nav>
+        <button class="hamburger-menu" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul id="menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#locations">Locations</a></li>
+            <li><a href="#gift-list">Lista Nozze</a></li>
+        </ul>
+    </nav>
+    
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Maddalena & Marco</h1>
+            <p>Ci sposiamo!</p>
+        </div>
+    </section>
+    
+    <section>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">0</div>
+                <div class="countdown-label">Giorni</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">0</div>
+                <div class="countdown-label">Ore</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">0</div>
+                <div class="countdown-label">Minuti</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">0</div>
+                <div class="countdown-label">Secondi</div>
+            </div>
+        </div>
+        
+        <h2>Vi invitiamo a celebrare il nostro amore</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.2rem;">
+            Siamo felici di condividere con voi il giorno più importante della nostra vita. La vostra presenza renderà questo momento ancora più speciale.
+        </p>
+    </section>
+    
+    <section id="locations">
+        <h2>Locations</h2>
+        <div class="locations-container">
+            <div class="location-card">
+                <div class="location-image ceremony-image"></div>
+                <div class="location-details">
+                    <h3>Cerimonia</h3>
+                    <p>Parrocchia di San Giorgio</p>
+                    <p><i class="far fa-clock"></i> Orario da definire</p>
+                    <a href="#" class="button">Mappa</a>
+                </div>
+            </div>
+            
+            <div class="location-card">
+                <div class="location-image reception-image"></div>
+                <div class="location-details">
+                    <h3>Ricevimento</h3>
+                    <p>Villa Cariola</p>
+                    <p><i class="far fa-clock"></i> Orario da definire</p>
+                    <a href="#" class="button">Mappa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="gift-list">
+        <h2>Lista Nozze</h2>
+        <div class="gift-list">
+            <p>Il vostro affetto e la vostra presenza sono il regalo più grande. Per chi desidera contribuire in altro modo, abbiamo preparato una lista nozze.</p>
+            <a href="#" class="button">Visualizza Lista Nozze</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Maddalena & Marco</p>
+            <p>19 Settembre 2025</p>
+            <p>Con amore e gratitudine</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Countdown Timer
+        const weddingDate = new Date('September 19, 2025 00:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+            
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById('days').innerText = 0;
+                document.getElementById('hours').innerText = 0;
+                document.getElementById('minutes').innerText = 0;
+                document.getElementById('seconds').innerText = 0;
+            }
+        }
+        
+        // Initial call
+        updateCountdown();
+        
+        // Update every second
+        const x = setInterval(updateCountdown, 1000);
+        
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        
+        hamburger.addEventListener('click', function() {
+            menu.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            if (menu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling for navigation and close mobile menu after click
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu after clicking a link
+                if (window.innerWidth <= 768) {
+                    menu.classList.remove('active');
+                    const icon = hamburger.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
